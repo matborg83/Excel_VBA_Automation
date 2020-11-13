@@ -1,0 +1,409 @@
+Public Monthnum, yearnum, monthtommorow, Monday_month, tommorow_day As String
+
+Public tommorowdate, Monday_date, DDate, Day_plus_three As Date
+
+Sub New_File_New_doc()
+
+Dim Day_is_we As Integer
+
+On Error GoTo ErrorHandler
+
+Application.ScreenUpdating = False
+
+
+'define Today Date, Today Month and Today year
+DDate = Date
+Monthnum = month(DDate)
+yearnum = Year(DDate)
+
+
+'define if today is Monday to Thursday OR Friday then redirect towards different Macro
+Day_is_we = Weekday(DDate, vbUseSystemDayOfWeek)
+
+
+If Day_is_we = 5 Then
+Monday_date = DateAdd("d", 3, DDate)
+Monday_month = month(Monday_date)
+    Call Macro_Friday 'Friday - 2 cases
+        
+        Else
+            tommorowdate = DateAdd("d", 1, DDate)
+            tommorow_day = Day(tommorowdate)
+            monthtommorow = month(tommorowdate)
+            
+                If Monthnum = monthtommorow Then
+                    Call Macro1 'Monday to Thursday  - same month
+                        Else
+                            Call Macro2 'Monday to Thursday  - new month
+                End If
+End If
+
+Application.ScreenUpdating = True
+
+
+Exit Sub
+
+ErrorHandler:
+MsgBox ("Error - Please contact Admin")
+
+
+End Sub
+
+Sub Macro_Friday() 'Friday - 2 cases (Macro4 and 5 - Condition:is new month or not)
+
+If Monthnum = Monday_month Then
+    Call Macro3 'Next Week - Same Month
+        Else
+            Call Macro4 'Next Week - new Month
+End If
+
+End Sub
+
+Sub Macro1() 'Monday to Thursday  - same month - will create 1 new folder and 1 excel doc
+
+
+Dim sFolderPath, sFolderName As String
+Dim sExcelName As String
+
+
+Call convert_month
+
+
+'Create New Folder with name=Date+1 in Folder current month
+
+sFolderName = tommorowdate
+
+sFolderPath = ****"FOLDER/PATH/CONFIDENTIAL"**** & Monthnum & " 2020\" & sFolderName
+
+MkDir (sFolderPath)
+
+
+'Delete value in current worksheets, save current worksheet and create Excel doc for the next day
+ActiveWorkbook.Save
+     
+    ActiveCell.Offset(0, -1).Range("A1:D1").Select
+    Selection.ClearContents
+    ActiveCell.Offset(-15, -3).Range("A1:B18").Select
+    Selection.ClearContents
+
+sExcelName = sFolderPath & "\" & tommorowdate & ".xlsm"
+    ActiveWorkbook.SaveAs FileName:= _
+        sExcelName, FileFormat:= _
+        xlOpenXMLWorkbookMacroEnabled, CreateBackup:=False
+
+
+MsgBox "Documents for the next working day have been created successfully!"
+
+
+
+End Sub
+
+Sub Macro2() 'Monday to Thursday - new month - will create 2 new folder and 1 excel doc
+
+Dim sFolderPath As String
+Dim sFileName As Date
+
+
+
+Call convert_month_2
+
+
+sFolderName = tommorowdate
+sFolderPath = ****"FOLDER/PATH/CONFIDENTIAL"****  & monthtommorow & " 2020"
+
+'create  new Folder with new Tommorow month
+MkDir (sFolderPath)
+
+'Create new Folder with with name=date+1
+
+sFolderPath = ****"FOLDER/PATH/CONFIDENTIAL"****  & monthtommorow & " 2020\" & sFolderName
+
+MkDir (sFolderPath)
+
+
+
+'Delete value in current worksheets, save current worksheet and create Excel doc for the next day
+
+ActiveWorkbook.Save
+    
+    
+Range("F23:I23").ClearContents
+Range("F4:F21").ClearContents
+Range("G4:G21").ClearContents
+
+
+sExcelName = sFolderPath & "\" & tommorowdate & ".xlsm"
+    
+    ActiveWorkbook.SaveAs FileName:= _
+        sExcelName, FileFormat:= _
+        xlOpenXMLWorkbookMacroEnabled, CreateBackup:=False
+
+'close WB
+ActiveWorkbook.Close
+
+
+MsgBox "Documents for the next working day have been created successfully!"
+
+
+End Sub
+
+
+Sub Macro3() 'Next Week - Same Month - will create 1 new folder and 1 excel doc
+
+
+Dim sFolderPath As String
+Dim sFileName As Date
+
+
+Call convert_month
+
+
+'Create New Folder with name=Date+1
+
+sFileName = Monday_date
+sFolderName = Monday_date
+
+'sFolderName = sFileName & "_" & Monday_month
+
+sFolderPath = ****"FOLDER/PATH/CONFIDENTIAL"****  & Monthnum & " 2020\" & sFolderName
+
+MkDir (sFolderPath)
+
+
+'Delete value in current worksheets, save current worksheet and create Excel doc for the next day
+
+ActiveWorkbook.Save
+    
+    
+Range("F23:I23").ClearContents
+Range("F4:F21").ClearContents
+Range("G4:G21").ClearContents
+    
+    
+sExcelName = sFolderPath & "\" & Monday_date & ".xlsm"
+    
+    ActiveWorkbook.SaveAs FileName:= _
+        sExcelName, FileFormat:= _
+        xlOpenXMLWorkbookMacroEnabled, CreateBackup:=False
+
+'close WB
+ActiveWorkbook.Close
+
+
+MsgBox "Documents for the next working day have been created successfully!"
+
+
+
+End Sub
+
+Sub Macro4() 'Next Week - new Month - will create 2 new folder and 1 excel doc
+
+
+Dim sFolderPath As String
+Dim sFileName As Date
+
+
+
+Call convert_month_Monday
+
+sFolderName = Monday_date
+sFolderPath = ****"FOLDER/PATH/CONFIDENTIAL"****  & Monday_month & " 2020"
+
+'Create New Folder with Month of Monday
+MkDir (sFolderPath)
+
+
+'Create New Folder with name=Date+3
+sFolderPath = ****"FOLDER/PATH/CONFIDENTIAL"**** & Monday_month & " 2020\" & sFolderName
+
+MkDir (sFolderPath)
+
+'Delete value in current worksheets, save current worksheet and create Excel doc for the next day
+
+ActiveWorkbook.Save
+    
+    
+Range("F23:I23").ClearContents
+Range("F4:F21").ClearContents
+Range("G4:G21").ClearContents
+
+
+sExcelName = sFolderPath & "\" & Monday_date & ".xlsm"
+    
+    ActiveWorkbook.SaveAs FileName:= _
+        sExcelName, FileFormat:= _
+        xlOpenXMLWorkbookMacroEnabled, CreateBackup:=False
+
+'close WB
+ActiveWorkbook.Close
+
+
+MsgBox "Documents for the next working day have been created successfully!"
+
+
+End Sub
+
+
+Sub convert_month()
+
+If Monthnum = 1 Then
+
+Monthnum = "JANUARY"
+
+ElseIf Monthnum = 2 Then
+
+Monthnum = "FEBRUARY"
+
+ElseIf Monthnum = 3 Then
+
+Monthnum = "MARCH"
+
+ElseIf Monthnum = 4 Then
+
+Monthnum = "APRIL"
+
+ElseIf Monthnum = 5 Then
+
+Monthnum = "MAY"
+
+ElseIf Monthnum = 6 Then
+
+Monthnum = "JUNE"
+
+ElseIf Monthnum = 7 Then
+
+Monthnum = "JULY"
+
+ElseIf Monthnum = 8 Then
+
+Monthnum = "AUGUST"
+
+ElseIf Monthnum = 9 Then
+
+Monthnum = "SEPTEMBER"
+
+ElseIf Monthnum = 10 Then
+
+Monthnum = "OCTOBER"
+
+ElseIf Monthnum = 11 Then
+
+Monthnum = "NOVEMBER"
+
+ElseIf Monthnum = 12 Then
+
+Monthnum = "DECEMBER"
+
+End If
+
+End Sub
+
+Sub convert_month_2()
+
+If monthtommorow = 1 Then
+
+monthtommorow = "JANUARY"
+
+ElseIf monthtommorow = 2 Then
+
+monthtommorow = "FEBRUARY"
+
+ElseIf monthtommorow = 3 Then
+
+monthtommorow = "MARCH"
+
+ElseIf monthtommorow = 4 Then
+
+monthtommorow = "APRIL"
+
+ElseIf monthtommorow = 5 Then
+
+monthtommorow = "MAY"
+
+ElseIf monthtommorow = 6 Then
+
+monthtommorow = "JUNE"
+
+ElseIf monthtommorow = 7 Then
+
+monthtommorow = "JULY"
+
+ElseIf monthtommorow = 8 Then
+
+monthtommorow = "AUGUST"
+
+ElseIf monthtommorow = 9 Then
+
+monthtommorow = "SEPTEMBER"
+
+ElseIf monthtommorow = 10 Then
+
+monthtommorow = "OCTOBER"
+
+ElseIf monthtommorow = 11 Then
+
+monthtommorow = "NOVEMBER"
+
+ElseIf monthtommorow = 12 Then
+
+monthtommorow = "DECEMBER"
+
+End If
+
+
+
+End Sub
+
+Sub convert_month_Monday()
+
+If Monday_month = 1 Then
+
+Monday_month = "JANUARY"
+
+ElseIf Monday_month = 2 Then
+
+Monday_month = "FEBRUARY"
+
+ElseIf Monday_month = 3 Then
+
+Monday_month = "MARCH"
+
+ElseIf Monday_month = 4 Then
+
+Monday_month = "APRIL"
+
+ElseIf Monday_month = 5 Then
+
+Monday_month = "MAY"
+
+ElseIf Monday_month = 6 Then
+
+Monday_month = "JUNE"
+
+ElseIf Monday_month = 7 Then
+
+Monday_month = "JULY"
+
+ElseIf Monday_month = 8 Then
+
+Monday_month = "AUGUST"
+
+ElseIf Monday_month = 9 Then
+
+Monday_month = "SEPTEMBER"
+
+ElseIf Monday_month = 10 Then
+
+Monday_month = "OCTOBER"
+
+ElseIf Monday_month = 11 Then
+
+Monday_month = "NOVEMBER"
+
+ElseIf Monday_month = 12 Then
+
+Monday_month = "DECEMBER"
+
+End If
+
+End Sub
