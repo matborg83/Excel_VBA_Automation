@@ -1,4 +1,4 @@
-## Date_NewFiles_NewExcelDoc
+## Date_NewFiles_NewExcelDocs
 Extract dates(days,months and years) - create new files and excel docs. 
 'define if today is Monday to Thursday OR Friday then links towards different sub macros
 Sub macro 1: 'Monday to Thursday  - same month - will create 1 new folder and 1 excel doc
