@@ -1,19 +1,16 @@
-Public var_ZA_BSE_Schecks As Integer
-Public var_ZA_DTA_und_SDD_Lastschriften As Integer
-Public var_ZA_DTA_STEP2_und_SCT_‹berweisungen As Integer
-Public var_ZA_Interne_Zahlungen As Integer
-Public var_ZA_ISE_Schecks As Integer
-Public var_ZA_POF_AZV As Integer
-Public var_ZE_BSE_Schecks As Integer
-Public var_ZE_DTA_und_SSD_Lastschriften As Integer
-Public var_ZE_DTA_STEP2_und_SCT_Uberweisungen As Integer
-Public var_ZE_ISE_Schecks As Integer
+Public var_**CONFIDENTIAL** As Integer
+Public var_**CONFIDENTIAL**n As Integer
+Public var_**CONFIDENTIAL** As Integer
+Public var_**CONFIDENTIAL** As Integer
+Public var_**CONFIDENTIAL** As Integer
+Public var_**CONFIDENTIAL** As Integer
+
 
 Option Explicit
 
 
 
-Sub PPM_Zahlen_Macro()
+Sub **CONFIDENTIAL**()
 On Error GoTo ErrorHandler
 Application.ScreenUpdating = False
 
@@ -33,14 +30,14 @@ Dim source_file_wb2 As String
 Dim source_file_wb3 As String
 
 
-Set wb_macro = Workbooks("PPM_Zahlen_Macro.xlsm")
+Set wb_macro = Workbooks("**CONFIDENTIAL**")
 
 ' _____________________________FILE **CONFIDENTIAL**  [Month] [Year].xls
 
 'Create a file called **CONFIDENTIAL** [Month] [Year].xls
 Set wb1 = Workbooks.Add
 
-'create userform for month
+'create userform for the month
 
 Month1 = InputBox("Enter the month :" & Chr(13) & Chr(10) & "First letter must be a capital Letter. " & Chr(13) & Chr(10) & "Example: January")
 
@@ -58,7 +55,7 @@ Sheets("**CONFIDENTIAL** ").Activate
 Cells(1, 1).Select
 
 Do While ActiveCell.Value <> Empty
-    If Mid(ActiveCell.Value, 1, 11) <> "**CONFIDENTIAL** " Or Mid(ActiveCell.Value, 1, 8) <> "FMBKDEMM" Then
+    If Mid(ActiveCell.Value, 1, 11) <> "**CONFIDENTIAL** " Or Mid(ActiveCell.Value, 1, 8) <> "**CONFIDENTIAL**" Then
         ActiveCell.EntireRow.Select
         Selection.Delete
         ActiveCell.Offset(-1, 0).Select
@@ -102,7 +99,7 @@ tot_auto = **CONFIDENTIAL**
 tot_man = InputBox("**CONFIDENTIAL** ")
 
 'Retrieve Gesamtzahlen and enter figures
-source_file_wb2 = "Q:\cbs\CBS81TS\SEPA\Reporting\Statistik PPM\PPM Zahlen\Gesamtzahlen PPM\" & Year1 & " " & "SEPA.xlsx"
+source_file_wb2 = "**CONFIDENTIAL**\" & Year1 & " " & "SEPA.xlsx"
 Set wb2 = Workbooks.Open(source_file_wb2)
 
 Worksheets("Monat").Activate
@@ -120,7 +117,7 @@ ActiveCell.Offset(1, 0).Value = tot_auto + tot_man
 wb2.Close Savechanges:=True
 
 'retrieve file **CONFIDENTIAL** 
-source_file_wb3 = "Q:\cbs\CBS81TS\SEPA\Reporting\Statistik PPM\PPM Zahlen\KPI" & " " & Year1 & "\CBD Indicateurs FDR SEPA" & " " & Year1 & ".xlsx"
+source_file_wb3 = "**CONFIDENTIAL**" & " " & Year1 & "\**CONFIDENTIAL**" & " " & Year1 & ".xlsx"
 Set wb3 = Workbooks.Open(source_file_wb3)
 
 Cells(1, 9).Select
