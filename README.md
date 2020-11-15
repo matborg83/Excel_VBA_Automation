@@ -2,7 +2,7 @@
 
 ## In Progress
 
-### VBA Macro/ Create_New_files_tommorow_date
+### VBA Macro/ Create_files_based_on_conditions
 Extract dates(days,months and years) - create new files and excel docs. 
 Define current day and redirect different sub-macros
 Sub macro 1: 'Monday to Thursday  - same month - will create 1 new folder and 1 excel doc
