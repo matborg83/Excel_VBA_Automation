@@ -1,0 +1,206 @@
+Public var_**CONFIDENTIAL** As Integer
+Public var_**CONFIDENTIAL**n As Integer
+Public var_**CONFIDENTIAL** As Integer
+Public var_**CONFIDENTIAL** As Integer
+Public var_**CONFIDENTIAL** As Integer
+Public var_**CONFIDENTIAL** As Integer
+
+
+Option Explicit
+
+
+
+Sub **CONFIDENTIAL**()
+On Error GoTo ErrorHandler
+Application.ScreenUpdating = False
+
+'Define variables/objects
+Dim wb1 As Workbook
+Dim wb2 As Workbook
+Dim wb3 As Workbook
+Dim wb_macro As Workbook
+Dim Month1 As String
+Dim Year1 As Integer
+Dim tot_auto As Integer
+Dim tot_man As Integer
+Dim OutApp As Object
+Dim OutMail As Object
+Dim source_file_wb1 As String
+Dim source_file_wb2 As String
+Dim source_file_wb3 As String
+
+
+Set wb_macro = Workbooks("**CONFIDENTIAL**")
+
+' _____________________________FILE **CONFIDENTIAL**  [Month] [Year].xls
+
+'Create a file called **CONFIDENTIAL** [Month] [Year].xls
+Set wb1 = Workbooks.Add
+
+'create userform for the month
+
+Month1 = InputBox("Enter the month :" & Chr(13) & Chr(10) & "First letter must be a capital Letter. " & Chr(13) & Chr(10) & "Example: January")
+
+Year1 = InputBox("Enter the year : (Format: YYYY)")
+
+
+source_file_wb1 = **CONFIDENTIAL**  & " " & Month1 & " " & Year1 & " " & ".xlsx"
+wb1.SaveAs (source_file_wb1)
+
+
+'clean up data in "**CONFIDENTIAL** " to keep only **CONFIDENTIAL** 
+wb_macro.Activate
+
+Sheets("**CONFIDENTIAL** ").Activate
+Cells(1, 1).Select
+
+Do While ActiveCell.Value <> Empty
+    If Mid(ActiveCell.Value, 1, 11) <> "**CONFIDENTIAL** " Or Mid(ActiveCell.Value, 1, 8) <> "**CONFIDENTIAL**" Then
+        ActiveCell.EntireRow.Select
+        Selection.Delete
+        ActiveCell.Offset(-1, 0).Select
+    
+    Else
+        ActiveCell.Offset(1, 0).Select
+
+    End If
+Loop
+
+Sheets("**CONFIDENTIAL** ").Activate
+Cells(1, 1).Select
+Do While ActiveCell.Value <> Empty
+    If Mid(ActiveCell.Value, 1, 11) <> "**CONFIDENTIAL** " Or Mid(ActiveCell.Value, 1, 8) <> "**CONFIDENTIAL** " Then
+        ActiveCell.EntireRow.Select
+        Selection.Delete
+        ActiveCell.Offset(-1, 0).Select
+    
+    Else
+        ActiveCell.Offset(1, 0).Select
+
+    End If
+Loop
+
+
+'copy and paste sheets from "**CONFIDENTIAL** " to **CONFIDENTIAL** [Month] [Year].xls
+Sheets(Array("**CONFIDENTIAL** ", "**CONFIDENTIAL** ")).Copy Before:=wb1.Sheets("Sheet1")
+Application.DisplayAlerts = False
+Worksheets("Sheet1").Delete
+Application.DisplayAlerts = True
+wb1.Close Savechanges:=True
+
+
+' _________________________________________Gesamtzahlen **CONFIDENTIAL** 
+
+'get info from user with userform1
+
+UserForm1.Show
+
+tot_auto = **CONFIDENTIAL** 
+tot_man = InputBox("**CONFIDENTIAL** ")
+
+'Retrieve Gesamtzahlen and enter figures
+source_file_wb2 = "**CONFIDENTIAL**\" & Year1 & " " & "SEPA.xlsx"
+Set wb2 = Workbooks.Open(source_file_wb2)
+
+Worksheets("Monat").Activate
+
+Cells(1, 2).Select
+
+Do While ActiveCell.Value <> Month1
+
+        ActiveCell.Offset(0, 1).Select
+Loop
+
+
+ActiveCell.Offset(1, 0).Value = tot_auto + tot_man
+
+wb2.Close Savechanges:=True
+
+'retrieve file **CONFIDENTIAL** 
+source_file_wb3 = "**CONFIDENTIAL**" & " " & Year1 & "\**CONFIDENTIAL**" & " " & Year1 & ".xlsx"
+Set wb3 = Workbooks.Open(source_file_wb3)
+
+Cells(1, 9).Select
+
+Do While ActiveCell.Value <> Month1
+
+ ActiveCell.Offset(0, 1).Select
+Loop
+
+ActiveCell.Offset(12, 0).Value = tot_auto
+
+Cells(1, 9).Select
+
+Do While ActiveCell.Value <> Month1
+
+ActiveCell.Offset(0, 1).Select
+
+Loop
+
+ActiveCell.Offset(14, 0).Value = tot_man
+
+wb3.Close Savechanges:=True
+
+' _____________________________EMAILS
+
+' EMAIL 1: **CONFIDENTIAL** 
+
+    Set OutApp = CreateObject("Outlook.Application")
+    Set OutMail = OutApp.CreateItem(0)
+    With OutMail
+        .to = "**CONFIDENTIAL** "
+        .CC = "**CONFIDENTIAL** "
+        .BCC = ""
+        .Subject = "**CONFIDENTIAL** " & " " & Month1 & " " & Year1
+        .Body = "Hallo Zusammen" & vbCrLf & vbCrLf & "anbei die Zahlen aus" & " " & Month1 & " " & Year1 & vbCrLf & vbCrLf & "Beste Gr¸ﬂe"
+        .Attachments.Add (source_file_wb1)
+        .Display
+    End With
+
+    Set OutMail = Nothing
+    Set OutApp = Nothing
+
+' EMAIL 2: Gesamtzahlen
+
+ Set OutApp = CreateObject("Outlook.Application")
+    Set OutMail = OutApp.CreateItem(0)
+    With OutMail
+        .to = "**CONFIDENTIAL** "
+        .CC = "**CONFIDENTIAL** "
+        .BCC = ""
+        .Subject = "Zhalen" & " " & Month1 & " " & Year1 & " " & "SEPA"
+        .Body = "Hallo Zusammen" & vbCrLf & vbCrLf & "anbei die Zahlen SEPA aus" & " " & Month1 & " " & Year1 & vbCrLf & vbCrLf & "Beste Gr¸ﬂe"
+        .Attachments.Add (source_file_wb2)
+        .Display
+    End With
+
+    Set OutMail = Nothing
+    Set OutApp = Nothing
+
+' EMAIL 3: **CONFIDENTIAL** 
+
+Set OutApp = CreateObject("Outlook.Application")
+    Set OutMail = OutApp.CreateItem(0)
+    With OutMail
+        .to = "**CONFIDENTIAL** "
+        .CC = "**CONFIDENTIAL** "
+        .BCC = ""
+        .Subject = "Banking Services Indicators regarding" & " " & Month1 & " " & Year1
+        .Body = "Dear All," & vbCrLf & vbCrLf & "Please find attached the report for number of **CONFIDENTIAL**  for " & " " & Month1 & " " & Year1 & vbCrLf & vbCrLf & "Best regards,"
+        .Attachments.Add (source_file_wb3)
+        .Display
+    End With
+
+    Set OutMail = Nothing
+    Set OutApp = Nothing
+
+
+
+Application.ScreenUpdating = True
+
+Exit Sub
+
+ErrorHandler:
+MsgBox ("ERROR. Please exit the Macro and try again." & Chr(13) & Chr(10) & "Please make sure:" & Chr(13) & Chr(10) & "1 - First letter of the month must be a capital letter (Example: January March...)." & Chr(13) & Chr(10) & "2 - Please make sure data are not already existing in the files for this month." & Chr(13) & Chr(10) & "3 - Enter 0 when no figures are available ")
+
+End Sub
