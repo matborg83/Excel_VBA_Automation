@@ -1,0 +1,369 @@
+Option Explicit
+
+Sub KPI()
+
+'Define variables
+Dim lastrow As Long
+Dim lastrow2 As Long
+Dim ans As Integer
+Dim i As Integer
+Dim rta As Integer
+Dim sst As Integer
+Dim sme As Integer
+Dim rme As Integer
+Dim rspta As Integer
+Dim sspta As Integer
+Dim rmepta As Integer
+Dim smepta As Integer
+Dim ssfe As Integer
+Dim rsfe As Integer
+Dim smefe As Integer
+Dim rmefe As Integer
+Dim rspta2 As Integer
+Dim sspta_tot As Integer
+Dim rmepta2 As Integer
+Dim rmepta_tot As Integer
+Dim smepta2 As Integer
+Dim smepta_tot As Integer
+Dim rspta_tot As Integer
+Dim sspta2 As Integer
+
+
+
+'_______________________________________Define last row in Data and Data2 worksheets
+
+lastrow = Worksheets("data").Cells(Rows.Count, 1).End(xlUp).Row
+
+lastrow2 = Worksheets("Data2").Cells(Rows.Count, 1).End(xlUp).Row
+
+'_________________________________________**Confidential**: rta
+rta = 0
+For i = 2 To lastrow
+
+If (Worksheets("data").Cells(i, 14).Value = "2" Or Worksheets("data").Cells(i, 14).Value = "") And _
+(Worksheets("data").Cells(i, 13).Value = "Accounted" Or Worksheets("data").Cells(i, 13).Value = "Confirmed" Or Worksheets("data").Cells(i, 13).Value = "") And _
+(Worksheets("data").Cells(i, 59).Value = "Internal") And _
+(Worksheets("data").Cells(i, 12).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 49).Value = "**Confidential**") And _
+(Mid(Worksheets("data").Cells(i, 4).Value, 1, 2) = "DE") Then
+
+rta = rta + 1
+End If
+Next i
+
+Worksheets("Template").Cells(30, 2).Value = rta
+
+
+'_________________________________________**Confidential**: sst
+sst = 0
+For i = 2 To lastrow
+
+If (Worksheets("data").Cells(i, 14).Value = "2" Or Worksheets("data").Cells(i, 14).Value = "") And _
+(Worksheets("data").Cells(i, 13).Value = "Accounted" Or Worksheets("data").Cells(i, 13).Value = "Confirmed" Or Worksheets("data").Cells(i, 13).Value = "") And _
+(Worksheets("data").Cells(i, 59).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 12).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 49).Value = "**Confidential**") And _
+(Mid(Worksheets("data").Cells(i, 4).Value, 1, 2) = "DE") Then
+
+sst = sst + 1
+End If
+Next i
+
+
+Worksheets("Template").Cells(22, 2).Value = sst
+
+'_________________________________________**Confidential**: RME
+
+rme = 0
+For i = 2 To lastrow
+
+If (Worksheets("data").Cells(i, 14).Value = "2" Or Worksheets("data").Cells(i, 14).Value = "") And _
+(Worksheets("data").Cells(i, 13).Value = "Accounted" Or Worksheets("data").Cells(i, 13).Value = "**Confidential**" Or Worksheets("data").Cells(i, 13).Value = "") And _
+(Worksheets("data").Cells(i, 59).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 12).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 49).Value = "**Confidential**" Or Worksheets("data").Cells(i, 49).Value = "**Confidential**" Or Worksheets("data").Cells(i, 49).Value = "") And _
+(Mid(Worksheets("data").Cells(i, 4).Value, 1, 2) = "DE") Then
+
+rme = rme + 1
+End If
+Next i
+
+Worksheets("Template").Cells(30, 8).Value = rme
+
+
+'_________________________________________**Confidential**: SME
+
+sme = 0
+For i = 2 To lastrow
+
+If (Worksheets("data").Cells(i, 14).Value = "2" Or Worksheets("data").Cells(i, 14).Value = "") And _
+(Worksheets("data").Cells(i, 13).Value = "Accounted" Or Worksheets("data").Cells(i, 13).Value = "Confirmed" Or Worksheets("data").Cells(i, 13).Value = "") And _
+(Worksheets("data").Cells(i, 59).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 12).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 49).Value = "**Confidential**" Or Worksheets("data").Cells(i, 49).Value = "**Confidential**" Or Worksheets("data").Cells(i, 49).Value = "") And _
+(Mid(Worksheets("data").Cells(i, 4).Value, 1, 2) = "DE") Then
+
+sme = sme + 1
+End If
+Next i
+
+Worksheets("Template").Cells(22, 8).Value = sme
+
+'_________________________________________**Confidential**: rspta and rspta2
+
+rspta = 0
+For i = 2 To lastrow
+
+If (Worksheets("data").Cells(i, 14).Value = "2" Or Worksheets("data").Cells(i, 14).Value = "") And _
+(Worksheets("data").Cells(i, 13).Value = "Accounted" Or Worksheets("data").Cells(i, 13).Value = "Confirmed" Or Worksheets("data").Cells(i, 13).Value = "") And _
+(Worksheets("data").Cells(i, 59).Value = "Internal") And _
+(Worksheets("data").Cells(i, 12).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 49).Value = "**Confidential**") And _
+(Mid(Worksheets("data").Cells(i, 4).Value, 1, 2) = "LU") Then
+
+rspta = rspta + 1
+End If
+Next i
+
+rspta2 = 0
+For i = 2 To lastrow2
+
+If (Worksheets("data2").Cells(i, 11).Value = "**Confidential**" And _
+(Worksheets("data2").Cells(i, 8).Value)) = "1" Then
+rspta2 = rspta2 + 1
+End If
+Next i
+
+rspta_tot = rspta + rspta2
+
+Worksheets("Template").Cells(30, 4).Value = rspta_tot
+
+
+'_________________________________________**Confidential**: sspta and sspta2
+sspta = 0
+For i = 2 To lastrow
+
+If (Worksheets("data").Cells(i, 14).Value = "2" Or Worksheets("data").Cells(i, 14).Value = "") And _
+(Worksheets("data").Cells(i, 13).Value = "Accounted" Or Worksheets("data").Cells(i, 13).Value = "Confirmed" Or Worksheets("data").Cells(i, 13).Value = "") And _
+(Worksheets("data").Cells(i, 59).Value = "Internal") And _
+(Worksheets("data").Cells(i, 12).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 49).Value = "**Confidential**") And _
+(Mid(Worksheets("data").Cells(i, 4).Value, 1, 2) = "LU") Then
+
+sspta = sspta + 1
+End If
+Next i
+
+
+sspta2 = 0
+For i = 2 To lastrow2
+
+If (Worksheets("data2").Cells(i, 11).Value = "SWT" And _
+(Worksheets("data2").Cells(i, 7).Value)) = "1" Then
+
+sspta2 = sspta2 + 1
+End If
+Next i
+
+sspta_tot = sspta + sspta2
+
+Worksheets("Template").Cells(22, 4).Value = sspta_tot
+
+'_________________________________________**Confidential**: rmepta rmepta2
+rmepta = 0
+For i = 2 To lastrow
+
+If (Worksheets("data").Cells(i, 14).Value = "2" Or Worksheets("data").Cells(i, 14).Value = "") And _
+(Worksheets("data").Cells(i, 13).Value = "Accounted" Or Worksheets("data").Cells(i, 13).Value = "Confirmed" Or Worksheets("data").Cells(i, 13).Value = "") And _
+(Worksheets("data").Cells(i, 59).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 12).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 49).Value = "**Confidential**" Or Worksheets("data").Cells(i, 49).Value = "**Confidential**" Or Worksheets("data").Cells(i, 49).Value = "") And _
+(Mid(Worksheets("data").Cells(i, 4).Value, 1, 2) = "LU") Then
+
+rmepta = rmepta + 1
+End If
+Next i
+
+
+rmepta2 = 0
+For i = 2 To lastrow2
+
+If (Worksheets("data2").Cells(i, 11).Value = "**Confidential**" And _
+(Worksheets("data2").Cells(i, 8).Value)) = "1" Then
+
+rmepta2 = rmepta2 + 1
+End If
+Next i
+
+rmepta_tot = rmepta + rmepta2
+
+
+
+Worksheets("Template").Cells(30, 10).Value = rmepta_tot
+
+'_________________________________________**Confidential**: smepta
+smepta = 0
+For i = 2 To lastrow
+
+If (Worksheets("data").Cells(i, 14).Value = "2" Or Worksheets("data").Cells(i, 14).Value = "") And _
+(Worksheets("data").Cells(i, 13).Value = "Accounted" Or Worksheets("data").Cells(i, 13).Value = "Confirmed" Or Worksheets("data").Cells(i, 13).Value = "") And _
+(Worksheets("data").Cells(i, 59).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 12).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 49).Value = "**Confidential**" Or Worksheets("data").Cells(i, 49).Value = "**Confidential**" Or Worksheets("data").Cells(i, 49).Value = "") And _
+(Mid(Worksheets("data").Cells(i, 4).Value, 1, 2) = "LU") Then
+
+smepta = smepta + 1
+End If
+Next i
+
+
+smepta2 = 0
+For i = 2 To lastrow2
+
+If (Worksheets("data2").Cells(i, 11).Value = "**Confidential**" And _
+(Worksheets("data2").Cells(i, 7).Value)) = "1" Then
+
+smepta2 = smepta2 + 1
+End If
+Next i
+
+smepta_tot = smepta + smepta2
+
+
+Worksheets("Template").Cells(22, 10).Value = smepta_tot
+
+
+'_________________________________________**Confidential**: ssfe
+ssfe = 0
+For i = 2 To lastrow
+
+If (Worksheets("data").Cells(i, 14).Value = "2" Or Worksheets("data").Cells(i, 14).Value = "") And _
+(Worksheets("data").Cells(i, 13).Value = "Accounted" Or Worksheets("data").Cells(i, 13).Value = "Confirmed" Or Worksheets("data").Cells(i, 13).Value = "") And _
+(Worksheets("data").Cells(i, 59).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 12).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 49).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") Then
+
+
+ssfe = ssfe + 1
+End If
+Next i
+
+Worksheets("Template").Cells(22, 6).Value = ssfe
+
+'_________________________________________**Confidential**: rsfe
+rsfe = 0
+For i = 2 To lastrow
+
+If (Worksheets("data").Cells(i, 14).Value = "2" Or Worksheets("data").Cells(i, 14).Value = "") And _
+(Worksheets("data").Cells(i, 13).Value = "Accounted" Or Worksheets("data").Cells(i, 13).Value = "Confirmed" Or Worksheets("data").Cells(i, 13).Value = "") And _
+(Worksheets("data").Cells(i, 59).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 12).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 49).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") Then
+
+rsfe = rsfe + 1
+End If
+Next i
+
+
+Worksheets("Template").Cells(30, 6).Value = rsfe
+'________________________________________**Confidential**: smefe
+smefe = 0
+For i = 2 To lastrow
+
+If (Worksheets("data").Cells(i, 14).Value = "2" Or Worksheets("data").Cells(i, 14).Value = "") And _
+(Worksheets("data").Cells(i, 13).Value = "Accounted" Or Worksheets("data").Cells(i, 13).Value = "Confirmed" Or Worksheets("data").Cells(i, 13).Value = "") And _
+(Worksheets("data").Cells(i, 59).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 12).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 49).Value = "**Confidential**" Or Worksheets("data").Cells(i, 49).Value = "REGUL") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") Then
+
+
+smefe = smefe + 1
+End If
+Next i
+
+Worksheets("Template").Cells(22, 12).Value = smefe
+
+
+'_________________________________________**Confidential**: rmefe
+rmefe = 0
+For i = 2 To lastrow
+
+If (Worksheets("data").Cells(i, 14).Value = "2" Or Worksheets("data").Cells(i, 14).Value = "") And _
+(Worksheets("data").Cells(i, 13).Value = "Accounted" Or Worksheets("data").Cells(i, 13).Value = "Confirmed" Or Worksheets("data").Cells(i, 13).Value = "") And _
+(Worksheets("data").Cells(i, 59).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 12).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 49).Value = "**Confidential**" Or Worksheets("data").Cells(i, 49).Value = "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "****Confidential****") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And _
+(Worksheets("data").Cells(i, 6).Value <> "**Confidential**") And (Worksheets("data").Cells(i, 6).Value <> "**Confidential**") Then
+
+rmefe = rmefe + 1
+End If
+Next i
+
+
+Worksheets("Template").Cells(30, 12).Value = rmefe
+
+End Sub
+
