@@ -16,8 +16,7 @@ Filter data main file, create new file and paste data.
 Userform ask input to user.
 Retrieve other Excel docs and paste relevant value in relevant cells (corresponding to current date)
 
-
 ### VBA Macro/ Data_filtering
 Define last row in the two worksheets using:
 For Loop + If function + AND and OR operators
-Extract from string from cells (similar to regular expressions)
+Extract string from cells (similar to regular expressions)
