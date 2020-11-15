@@ -15,7 +15,7 @@ Folders and Excel docs created with name = tommorow date.
 Define last row in the two worksheets using:
 For Loop + If function + AND and OR operators
 
-### Title VBA Macro/ Userform_and_automated emails
+### Title VBA Macro/ Userform_and_Emails_Automation
 Filter data main file, create new file and paste data. 
 Userform ask input to user.
 Retrieve other Excel docs and paste relevant value in relevant cells (corresponding to current date)
