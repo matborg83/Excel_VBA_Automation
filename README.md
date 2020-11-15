@@ -20,3 +20,4 @@ Retrieve other Excel docs and paste relevant value in relevant cells (correspond
 ### VBA Macro/ Data_filtering
 Define last row in the two worksheets using:
 For Loop + If function + AND and OR operators
+Extract from string from cells (similar to regular expressions)
