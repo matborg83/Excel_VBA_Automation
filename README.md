@@ -11,11 +11,12 @@ Sub macro 3:'Next Week - Same Month - will create 1 new folder and 1 excel doc
 Sub macro 4:'Next Week - new Month - will create 2 new folder and 1 excel doc
 Folders and Excel docs created with name = tommorow date.
 
-### VBA Macro/ Data_filtering
-Define last row in the two worksheets using:
-For Loop + If function + AND and OR operators
-
 ### VBA Macro/ Userform_and_Emails_Automation
 Filter data main file, create new file and paste data. 
 Userform ask input to user.
 Retrieve other Excel docs and paste relevant value in relevant cells (corresponding to current date)
+
+
+### VBA Macro/ Data_filtering
+Define last row in the two worksheets using:
+For Loop + If function + AND and OR operators
